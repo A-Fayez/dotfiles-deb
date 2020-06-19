@@ -1,6 +1,6 @@
 source ~/.aliases
 source ~/.profile
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#c6c6c6'
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#444444'
 
 # start tmux if we're not in a tmux session
 if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ ! "$TERM" =~ xterm-kitty ]]; then
