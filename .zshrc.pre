@@ -1,4 +1,4 @@
-source ~/.bash_aliases
+source ~/.aliases
 source ~/.profile
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#c6c6c6'
 
