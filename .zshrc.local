@@ -1,5 +1,5 @@
-ZSH_SYNTAX=/mnt/hdd/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_SUGGESTION=/mnt/hdd/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_SYNTAX=$(pwd)/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_SUGGESTION=$(pwd)/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 if [[ -f "$ZSH_SYNTAX" ]] && [[ -f "$ZSH_SUGGESTION" ]]; then
     source "$ZSH_SYNTAX"
