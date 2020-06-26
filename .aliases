@@ -3,3 +3,6 @@ alias pip=pip3
 alias mv="mv -i"
 alias pg="ping www.google.com"
 
+alias gs="git status"
+alias gm="git commit -m"
+
