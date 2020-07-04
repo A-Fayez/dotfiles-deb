@@ -1,5 +1,5 @@
 source ~/.aliases
-source ~/.profile
+source ~/.zprofile
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#444444'
 
 # start tmux if we're not in a tmux session

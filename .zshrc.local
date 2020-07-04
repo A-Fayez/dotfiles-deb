@@ -1,16 +1,12 @@
 ZSH_SYNTAX="$HOME/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 ZSH_SUGGESTION="$HOME/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
-# docker completions
+# completions
 fpath=(~/dotfiles/completions $fpath)
 
-autoload -Uz compinit && compinit -i
-
+# compinit
 
 if [[ -f "$ZSH_SYNTAX" ]] && [[ -f "$ZSH_SUGGESTION" ]]; then
     source "$ZSH_SYNTAX"
     source "$ZSH_SUGGESTION"
 fi
-
-
-
