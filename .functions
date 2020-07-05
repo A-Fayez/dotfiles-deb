@@ -1,6 +1,0 @@
-# gets custom zsh completions from 
-# https://github.com/zsh-users/zsh-completions/
-
-add_completion() {
-    curl -sSL https://raw.githubusercontent.com/zsh-users/zsh-completions/master/src/"_$1" > ~/dotfiles/completions/"_$1"
-}

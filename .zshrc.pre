@@ -1,6 +1,6 @@
 source ~/.aliases
 source ~/.zprofile
-source ~/.functions
+source ~/dotfiles/functions.sh
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#444444'
 
