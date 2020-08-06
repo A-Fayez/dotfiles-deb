@@ -1,3 +1,5 @@
+setopt extended_glob
+
 ZSH_SYNTAX="$HOME/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 ZSH_SUGGESTION="$HOME/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh"
 

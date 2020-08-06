@@ -8,6 +8,10 @@ set backspace=indent,eol,start
 set hidden
 set ignorecase
 set smartcase
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
 
 set noerrorbells visualbell t_vb=
 set mouse+=a

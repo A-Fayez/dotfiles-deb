@@ -49,3 +49,5 @@ tmux source-file ~/.tmux.conf
 source ~/.zshrc
 
 echo "Done!"
+
+# TODO: alacritty and nvim
