@@ -12,3 +12,5 @@ if [[ -f "$ZSH_SYNTAX" ]] && [[ -f "$ZSH_SUGGESTION" ]]; then
     source "$ZSH_SYNTAX"
     source "$ZSH_SUGGESTION"
 fi
+export TERM=xterm-256color
+
