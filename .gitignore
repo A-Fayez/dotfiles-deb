@@ -1,2 +1,4 @@
 # dolphine file manager configs
 .directory
+.config/nvim/autoload
+.config/nvim/plugged

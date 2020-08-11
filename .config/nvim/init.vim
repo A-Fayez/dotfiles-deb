@@ -1,3 +1,7 @@
+if has('termguicolors')
+  set termguicolors
+endif
+
 set nocompatible
 syntax on
 set background=""
@@ -32,10 +36,6 @@ Plug 'mhartington/oceanic-next'
 call plug#end()
 
 " sonokai_stylei theme config
-" " Important!!
-if has('termguicolors')
-  set termguicolors
-endif
 let g:sonokai_style = 'shusia'
 let g:sonokai_disable_italic_comment = 1
 
@@ -48,10 +48,7 @@ set splitbelow
 " navigate auto-completion window with tab
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-" Theme
-" let g:airline_theme='solarized'
-" let g:airline_solarized_bg='dark'
-" buffer tab
+" Theme and airline configs
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail'
@@ -85,8 +82,13 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
+let g:airline#extensions#branch#format = 1
+
+let NERDTreeShowHidden=1
+
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
+map <C-n> :NERDTreeToggle<CR>
 
 " nnoremap <Left>  :echoe "Use h"<CR>
 " nnoremap <Right> :echoe "Use l"<CR>
