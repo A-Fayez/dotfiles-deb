@@ -1,7 +1,9 @@
 if has('termguicolors')
   set termguicolors
 endif
-
+set tabstop=4
+set shiftwidth=4
+set expandtab
 set nocompatible
 syntax on
 set background=""
