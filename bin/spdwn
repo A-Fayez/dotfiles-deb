@@ -1,0 +1,70 @@
+#!/bin/bash
+#: Author 	: "Ahmed Fayez <ahmedf.higgy@gmail.com>"
+#: Description 	: "A wrapper script that uses spotdl, it will download music to /mnt/hdd/music"
+#		  " Options just to specify dir names"
+#: options 	: "--dir, --path"
+set -uo pipefail
+trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
+
+path=/mnt/hdd/music
+dir=
+url=
+
+case $1 in
+    -d|--dir)
+        if [ "$2" ]; then
+            dir=$2
+            url=${3:?"Missing url"}
+        fi
+        ;;
+
+    --dir=?*)
+        dir=${1#*=}
+        url=${2:?"Missing url"}
+        ;;
+
+    -?*)
+        echo "Unkown option"; exit 1
+        ;;
+
+    *)
+        url=${1:?"Missing url"}
+        
+esac
+    
+if [ -z "$url" ]; then
+    echo "Missing url"; exit 1
+fi
+
+echo $dir
+mkdir -p "$path/$dir"
+echo $?
+path="$path/$dir"
+cd "$path"
+
+# extract spotdl options
+url_regex='(https:\/\/open\.spotify\.com\/)([a-z]+)\/(.*)$'
+if [[ "$url" =~ $url_regex ]]; then
+    spotdl_option=--${BASH_REMATCH[2]}
+    if [[ "$spotdl_option" == "--track" ]]; then
+        spotdl_option=--song
+        spotdl ${spotdl_option} ${url} 
+        exit 0
+    fi
+else
+    echo "Wrong spotify URL"; exit 1
+fi
+
+# DEBUGGIN
+echo $url
+echo $spotdl_option
+echo $dir
+# END
+# if [ "$dir" ]; then
+#    mkdir -p $dir
+#    cd $dir
+# fi
+
+spotdl $spotdl_option $url --write-to=metadata.txt
+spotdl --list metadata.txt
+rm metadata.txt -r spotdl  
