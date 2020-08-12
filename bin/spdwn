@@ -6,6 +6,10 @@
 set -uo pipefail
 trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
+RED='\033[0;31m'
+GREEN='\033[0;32'
+NC='\033[0m'
+
 path=/mnt/hdd/music
 dir=
 url=
@@ -33,14 +37,12 @@ case $1 in
 esac
     
 if [ -z "$url" ]; then
-    echo "Missing url"; exit 1
+    echo -e "${RED}[WRAPPER]:${NC} Missing URL"; exit 1
 fi
 
-echo $dir
 mkdir -p "$path/$dir"
-echo $?
 path="$path/$dir"
-cd "$path"
+cd "$path" || (echo -e "${RED}[WRAPPER]:${NC} No such directory: $path"; exit 1)
 
 # extract spotdl options
 url_regex='(https:\/\/open\.spotify\.com\/)([a-z]+)\/(.*)$'
@@ -48,23 +50,15 @@ if [[ "$url" =~ $url_regex ]]; then
     spotdl_option=--${BASH_REMATCH[2]}
     if [[ "$spotdl_option" == "--track" ]]; then
         spotdl_option=--song
-        spotdl ${spotdl_option} ${url} 
+        spotdl "${spotdl_option}" "${url}" 
         exit 0
     fi
 else
-    echo "Wrong spotify URL"; exit 1
+    echo -e "${RED}[WRAPPER]:${NC} Wrong spotify URL"; exit 1
 fi
 
-# DEBUGGIN
-echo $url
-echo $spotdl_option
-echo $dir
-# END
-# if [ "$dir" ]; then
-#    mkdir -p $dir
-#    cd $dir
-# fi
-
-spotdl $spotdl_option $url --write-to=metadata.txt
+spotdl "$spotdl_option" "$url" --write-to=metadata.txt
 spotdl --list metadata.txt
-rm metadata.txt -r spotdl  
+rm metadata.txt -r spotdl 
+echo -e "${GREEN}[WRAPPER]:${NC} Successfully downloaded to $path"
+exit 0
