@@ -50,4 +50,10 @@ source ~/.zshrc
 
 echo "Done!"
 
+# scripts
+
+for script in "${pwd}/bin"; do
+    ln -sv "$script" "/usr/local/bin"
+fi
+
 # TODO: alacritty and nvim
