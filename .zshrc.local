@@ -1,4 +1,17 @@
+
 setopt extended_glob
+
+source "$HOME/dotfiles/.aliases"
+source "$HOME/dotfiles/.zprofile"
+source "$HOME/dotfiles/functions.sh"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#444444'
+
+#  start tmux if we're not in a tmux session
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ ! "$TERM" =~ xterm-kitty ]]; then
+    exec tmux
+fi
+
 
 ZSH_SYNTAX="$HOME/dotfiles/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 ZSH_SUGGESTION="$HOME/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh"
@@ -7,10 +20,8 @@ ZSH_SUGGESTION="$HOME/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fpath=(~/dotfiles/zsh-completions $fpath)
 
 # compinit
-
-if [[ -f "$ZSH_SYNTAX" ]] && [[ -f "$ZSH_SUGGESTION" ]]; then
-    source "$ZSH_SYNTAX"
-    source "$ZSH_SUGGESTION"
-fi
 export TERM=xterm-256color
-
+if [[ -f "$ZSH_SYNTAX" ]] && [[ -f "$ZSH_SUGGESTION" ]]; then
+    source "$ZSH_SUGGESTION"
+    source "$ZSH_SYNTAX"
+fi

@@ -1,7 +1,7 @@
 # gets custom zsh completions from 
 # https://github.com/zsh-users/zsh-completions/
 # Usage: add_completion <completion_plugin_name>
-add_completion() {
+add_zsh_completion() {
 
     if [ -z $1 ]
     then

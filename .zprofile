@@ -12,6 +12,5 @@ fi
 export PATH=/mnt/hdd/npm/npm-global/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:~/go/bin
-export XDG_CONFIG_HOME=
 
 export PATH="$HOME/.cargo/bin:$PATH"
