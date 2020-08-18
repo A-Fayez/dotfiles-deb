@@ -29,19 +29,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'
 " Themes
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'nightsense/carbonized'
-Plug 'joshdick/onedark.vim'
-Plug 'sainnhe/sonokai'
-Plug 'mhartington/oceanic-next'
+Plug 'chriskempson/base16-vim'
+
 
 call plug#end()
 
-" sonokai_stylei theme config
-let g:sonokai_style = 'shusia'
-let g:sonokai_disable_italic_comment = 1
-
-colorscheme sonokai
+colorscheme base16-default-dark
 
 let g:deoplete#enable_at_startup = 1
 
