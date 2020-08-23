@@ -2,6 +2,7 @@ if has('termguicolors')
   set termguicolors
 endif
 set tabstop=4
+set autoindent
 set shiftwidth=4
 set expandtab
 set nocompatible
@@ -24,7 +25,6 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'
