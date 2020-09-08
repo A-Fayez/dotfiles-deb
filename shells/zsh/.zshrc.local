@@ -1,0 +1,20 @@
+source "$HOME/dotfiles/shells/alias"
+source "$HOME/dotfiles/shells/functions"
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#444444'
+
+#  start tmux if we're not in a tmux session
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [[ ! "$TERM" =~ xterm-kitty ]]; then
+    exec tmux
+fi
+
+# completions
+fpath=(~/dotfiles/shells/zsh/completions $fpath)
+
+# compinit
+if [[ -f "$ZSH_SYNTAX" ]] && [[ -f "$ZSH_SUGGESTION" ]]; then
+    local highlighting = "$HOME/dotfiles/shells/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    local suggestions = "$HOME/dotfiles/shells/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+    source "$highlighting"
+    source "$suggestions"
+fi
