@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash 
 
 set -uo pipefail
 shopt -s dotglob
@@ -49,6 +49,8 @@ done
 
 # out-of-xdg confings
 ln -svf "$HOME/dotfiles/.tmux.conf" "$HOME"
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 
 
 tmux source-file ~/.tmux.conf
