@@ -47,6 +47,10 @@ for dir in "$HOME/dotfiles/config"/*; do
     ln -svf "$dir" "$HOME/.config"
 done
 
+# out-of-xdg confings
+ln -svf "$HOME/dotfiles/.tmux.conf" "$HOME"
+
+
 tmux source-file ~/.tmux.conf
 source ~/.zshrc
 
