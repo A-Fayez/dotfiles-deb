@@ -11,10 +11,7 @@ fi
 # completions
 fpath=(~/dotfiles/shells/zsh/completions $fpath)
 
-# compinit
-if [[ -f "$ZSH_SYNTAX" ]] && [[ -f "$ZSH_SUGGESTION" ]]; then
-    local highlighting = "$HOME/dotfiles/shells/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-    local suggestions = "$HOME/dotfiles/shells/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
-    source "$highlighting"
-    source "$suggestions"
-fi
+local highlighting="$HOME/dotfiles/shells/zsh/highlighting/zsh-syntax-highlighting.zsh"
+local suggestions="$HOME/dotfiles/shells/zsh/suggestions/zsh-autosuggestions.zsh"
+source "$highlighting"
+source "$suggestions"
