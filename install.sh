@@ -38,13 +38,6 @@ if ! grep "$zsh_path" /etc/shells; then
     echo "$zsh_path" | sudo tee -a /etc/shells
 fi
 
-# sourcing and symlinking files
-# for file in $(pwd)/*; do
-#     if [ ! -d "$file" ] && ["$file" != "$(pwd)/.gitignore"] && ["$file" != "$(pwd)/.gitmodules"] && ["$file" != "$(pwd)/.directory"]; then
-#         ln -sv "$file" "$HOME"
-#     fi
-# done
-
 # shells
 source "$HOME/dotfiles/shells/install"
 
