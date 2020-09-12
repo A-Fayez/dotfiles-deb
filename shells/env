@@ -1,3 +1,5 @@
+#!/bin/bash
+
 source "$HOME/dotfiles/shells/env_functions"
 
 # set PATH so it includes user's private bin if it exists

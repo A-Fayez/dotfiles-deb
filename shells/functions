@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # gets custom zsh completions from 
 # https://github.com/zsh-users/zsh-completions/
 # Usage: add_completion <completion_plugin_name>

@@ -1,3 +1,4 @@
+#!/bin/bash
 # a seperate module for installin shell-specific configs
 
 # bash
