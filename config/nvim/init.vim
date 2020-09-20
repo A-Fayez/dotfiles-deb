@@ -6,7 +6,7 @@ set autoindent
 set shiftwidth=4
 set expandtab
 set nocompatible
-syntax on
+syntax enable
 set background=""
 set shortmess+=I
 set number
