@@ -26,5 +26,10 @@ require'nvim_lsp'.rust_analyzer.setup({
 
 require'nvim_lsp'.pyls.setup({
   on_attach = on_attach,
-  capabilities = lsp_status.capabilities
+  capabilities = lsp_status.capabilities,
+  settings = {
+      pyls = {
+          configurationSources = {"flake8"}
+      }
+  }
 })
