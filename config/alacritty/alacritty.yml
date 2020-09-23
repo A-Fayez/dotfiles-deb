@@ -5,10 +5,13 @@ colors:
     background: '#000000'
     foreground: '#d8d8d8'
 
-  # Colors the cursor will use if `custom_cursor_colors` is true
+    #cursor:
+      #text: CellBackground
+      #cursor: '#000000'
+
   cursor:
-    text: '#d8d8d8'
-    cursor: '#d8d8d8'
+      text: '#000000'
+      cursor: '#d8d8d8'
 
   # Normal colors
   normal:
