@@ -1,3 +1,4 @@
+alias vim=nvim
 alias python=python3
 alias pip=pip3
 alias mv="mv -i"
@@ -6,7 +7,8 @@ alias pg="ping www.google.com"
 alias gs="git status"
 alias gm="git commit -m"
 
-alias pose="docker-compose"
+alias compose="docker-compose"
+
 alias containers="docker containr ls -a"
 alias volumes="docker volume ls"
 alias images="docker images"

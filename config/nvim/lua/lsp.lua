@@ -2,12 +2,13 @@ local lsp_status = require('lsp-status')
 local diagnostic = require('diagnostic')
 local completion = require('completion')
 
-local on_attach = function(client, bufnr)
-  completion.on_attach(client, bufnr)
-  diagnostic.on_attach(client, bufnr)
-  lsp_status.on_attach(client, bufnr)
+local on_attach = function(client)
+  completion.on_attach(client)
+  diagnostic.on_attach(client)
+  lsp_status.on_attach(client)
 
   vim.api.nvim_command('autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 500)')
+  vim.api.nvim_command('autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 500)')
   vim.fn.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {noremap = true, silent = true})
   vim.fn.nvim_set_keymap("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true, silent = true})
   vim.fn.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.implementation()<CR>", {noremap = true, silent = true})
@@ -23,3 +24,7 @@ require'nvim_lsp'.rust_analyzer.setup({
   capabilities = lsp_status.capabilities
 })
 
+require'nvim_lsp'.pyls.setup({
+  on_attach = on_attach,
+  capabilities = lsp_status.capabilities
+})

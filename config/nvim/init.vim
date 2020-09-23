@@ -28,6 +28,7 @@ Plug 'nvim-lua/lsp-status.nvim'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-lua/diagnostic-nvim'
+Plug 'tjdevries/lsp_extensions.nvim'
 
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
@@ -98,21 +99,44 @@ endfunction
 set statusline+=\ %{LspStatus()}`
 
 " completion-nvim
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <C-space> completion#trigger_completion()
+
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 let g:completion_enable_snippet = 'UltiSnips'
+autocmd Filetype python setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 "diagnostics-nvim
 let g:diagnostic_insert_delay = 1
 let g:diagnostic_show_sign = 1
 let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_trimmed_virtual_text = '40'
+set signcolumn=yes
+set updatetime=300
+autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>
+nnoremap <silent> g] <cmd>NextDiagnosticCycle<cr>
 
 lua require("lsp")
 lua require("treesitter")
 
 filetype plugin indent on
+
+
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>
+nnoremap <silent> g] <cmd>NextDiagnosticCycle<cr>
+
+" Enable type inlay hints
+autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
+
+"set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·,space:·
+"set colorcolumn=+1
 
 " nnoremap <Left>  :echoe "Use h"<CR>
 " nnoremap <Right> :echoe "Use l"<CR>
