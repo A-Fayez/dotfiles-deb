@@ -23,8 +23,13 @@ set incsearch
 
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/lsp-status.nvim'
+Plug 'nvim-lua/completion-nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-lua/diagnostic-nvim'
+
 Plug 'scrooloose/nerdtree'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dense-analysis/ale'
@@ -36,13 +41,10 @@ call plug#end()
 
 colorscheme base16-default-dark
 
-let g:deoplete#enable_at_startup = 1
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 set splitbelow
 " navigate auto-completion window with tab
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 " Theme and airline configs
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
@@ -84,6 +86,33 @@ let NERDTreeShowHidden=1
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
 map <C-n> :NERDTreeToggle<CR>
+
+" lsp-status
+function! LspStatus() abort
+  if luaeval('#vim.lsp.buf_get_clients() > 0')
+    return luaeval("require('lsp-status').status()")
+  endif
+  return ''
+endfunction
+
+set statusline+=\ %{LspStatus()}`
+
+" completion-nvim
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+let g:completion_enable_snippet = 'UltiSnips'
+
+"diagnostics-nvim
+let g:diagnostic_insert_delay = 1
+let g:diagnostic_show_sign = 1
+let g:diagnostic_enable_virtual_text = 1
+
+lua require("lsp")
+lua require("treesitter")
+
+filetype plugin indent on
 
 " nnoremap <Left>  :echoe "Use h"<CR>
 " nnoremap <Right> :echoe "Use l"<CR>

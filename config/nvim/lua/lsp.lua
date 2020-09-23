@@ -20,5 +20,6 @@ end
 
 require'nvim_lsp'.rust_analyzer.setup({
   on_attach = on_attach,
-  cap
+  capabilities = lsp_status.capabilities
+})
 
