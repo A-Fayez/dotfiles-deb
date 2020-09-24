@@ -29,7 +29,11 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-lua/diagnostic-nvim'
 Plug 'tjdevries/lsp_extensions.nvim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 
+" ui
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -48,6 +52,7 @@ set splitbelow
 " navigate auto-completion window with tab
 " Theme and airline configs
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 " air-line
@@ -86,7 +91,7 @@ let NERDTreeShowHidden=1
 
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
-map <C-n> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle %<CR>
 
 " lsp-status
 function! LspStatus() abort
@@ -99,10 +104,6 @@ endfunction
 set statusline+=\ %{LspStatus()}`
 
 " completion-nvim
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent><expr> <C-space> completion#trigger_completion()
 
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
@@ -118,32 +119,50 @@ set signcolumn=yes
 set updatetime=300
 autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>
-nnoremap <silent> g] <cmd>NextDiagnosticCycle<cr>
 
 lua require("lsp")
 lua require("treesitter")
 
 filetype plugin indent on
 
+" custom mappings
+let mapleader = " "
+nnoremap <Leader><space> :noh<cr>
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <silent><expr> <C-space> completion#trigger_completion()
+
+nnoremap <C-s> :w<CR> 
+inoremap <C-s> <Esc>:w<CR>l
+vnoremap <C-s> <Esc>:w<CR>l
 
 " Goto previous/next diagnostic warning/error
 nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>
 nnoremap <silent> g] <cmd>NextDiagnosticCycle<cr>
+"fzf and git
+nnoremap <C-f> :Files<CR> 
+nnoremap <Leader>gs :GFiles?<CR> 
+nnoremap <Leader>gb :Git branch<CR> 
+nnoremap <Leader>lg :Commits<CR> 
+nnoremap <leader>gf :Git fetch --all<CR>
+nnoremap <leader>grum :Git rebase upstream/master<CR>
+nnoremap <leader>grom :Git rebase origin/master<CR>
+
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
 
+autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+
 "set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·,space:·
 "set colorcolumn=+1
 
-" nnoremap <Left>  :echoe "Use h"<CR>
-" nnoremap <Right> :echoe "Use l"<CR>
-" nnoremap <Up>    :echoe "Use k"<CR>
-" nnoremap <Down>  :echoe "Use j"<CR>
-" ...and in insert mode
-" inoremap <Left>  <ESC>:echoe "Use h"<CR>
-" inoremap <Right> <ESC>:echoe "Use l"<CR>
-" inoremap <Up>    <ESC>:echoe "Use k"<CR>
-" inoremap <Down>  <ESC>:echoe "Use j"<CR>
