@@ -37,7 +37,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 " Themes
 Plug 'chriskempson/base16-vim'
 
@@ -45,7 +45,6 @@ Plug 'chriskempson/base16-vim'
 call plug#end()
 
 colorscheme base16-default-dark
-
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 set splitbelow
@@ -87,7 +86,10 @@ let g:airline_symbols.linenr = ''
 
 let g:airline#extensions#branch#format = 1
 
-let NERDTreeShowHidden=1
+"let NERDTreeShowHidden=1
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
 
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
@@ -132,7 +134,9 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
-
+" buffer navigation
+nnoremap <F3> :bn<CR>
+nnoremap <F2> :bp<CR>
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -141,7 +145,7 @@ inoremap <silent><expr> <C-space> completion#trigger_completion()
 
 nnoremap <C-s> :w<CR> 
 inoremap <C-s> <Esc>:w<CR>l
-vnoremap <C-s> <Esc>:w<CR>l
+vnoremap <C-s> <Esc>:w<CR>
 
 " Goto previous/next diagnostic warning/error
 nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>
