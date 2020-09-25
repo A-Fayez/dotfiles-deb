@@ -37,7 +37,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 " Themes
 Plug 'chriskempson/base16-vim'
 
@@ -86,10 +86,7 @@ let g:airline_symbols.linenr = ''
 
 let g:airline#extensions#branch#format = 1
 
-"let NERDTreeShowHidden=1
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore = []
+let NERDTreeShowHidden=1
 
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
@@ -137,6 +134,7 @@ nnoremap <leader>l :wincmd l<CR>
 " buffer navigation
 nnoremap <F3> :bn<CR>
 nnoremap <F2> :bp<CR>
+"nnoremap <Leader>q <C-w>w<CR>
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -166,6 +164,8 @@ autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
 
 autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "set listchars=tab:▸\ ,extends:❯,precedes:❮,trail:·,nbsp:·,space:·
 "set colorcolumn=+1
